@@ -9,7 +9,7 @@ interface CardProps {
 
 const Card = ({ title, icon, quantity, subtext }: CardProps) => {
 	return (
-		<div className='min-h-[70px] w-full rounded-md border px-4 py-7 '>
+		<div className='min-h-[70px] w-full rounded-md border px-4 py-7 shadow-sm'>
 			<div className='flex justify-between items-center'>
 				<p className='font-medium text-sm text-secondary-foreground select-none'>
 					{title}

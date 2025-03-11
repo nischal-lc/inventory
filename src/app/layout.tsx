@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contextProviders/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
+import Sidebar from "@/components/ui/Sidebar";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -27,8 +28,13 @@ export default function RootLayout({
 					defaultTheme='system'
 					enableSystem
 					disableTransitionOnChange>
-					<Navbar />
-					{children}
+					<div className='flex'>
+						<Sidebar />
+						<div className='flex flex-col w-full'>
+							<Navbar />
+							{children}
+						</div>
+					</div>
 				</ThemeProvider>
 			</body>
 		</html>

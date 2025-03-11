@@ -6,7 +6,7 @@ const Dashboard = () => {
 	return (
 		<div className='px-7 mt-6'>
 			<h1 className=' text-xl font-bold'>Dashboard</h1>
-			<div className='  mt-7 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
+			<div className='my-7 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
 				<Card
 					title='Total items'
 					icon={<Package className='size-5' />}
