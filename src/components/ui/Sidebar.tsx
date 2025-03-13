@@ -11,6 +11,7 @@ import {
 	Truck,
 	LogOut,
 	CircleDollarSign,
+	X,
 } from "lucide-react";
 import React, { useState } from "react";
 import {
@@ -30,19 +31,26 @@ interface LIprops {
 const Sidebar = () => {
 	const [isInvOpen, setIsInvOpen] = useState<boolean>(true);
 	const [isAdminOpen, setIsAdminOpen] = useState<boolean>(true);
-	const { isOpen } = useSidebar();
+	const { isOpen, toggleSidebar } = useSidebar();
 
 	return (
 		<div
-			className={` h-screen transition-all duration-200 border-r fixed md:sticky bg-background z-50 top-0 overflow-y-auto customScroll ${
+			className={` h-screen transition-all duration-200 border-r fixed md:sticky bg-background z-[55] top-0 overflow-y-auto customScroll ${
 				isOpen
 					? "clip-path-none  min-w-[200px] w-[270px] opacity-100 visible"
 					: "clip-path-inset-0 w-0 opacity-0 invisible"
 			}`}>
-			<p className='flex gap-1 items-center font-bold text-lg border-b px-3 h-[67px] sticky top-0 '>
-				<Package2 className='size-5' />
-				InvManage
-			</p>
+			<div className='flex justify-between items-center border-b px-3'>
+				<p className='flex gap-1 items-center font-bold text-lg h-[66px] sticky top-0 '>
+					<Package2 className='size-5' />
+					InvManage
+				</p>
+				<div
+					className='p-2 md:hidden rounded-full hover:bg-secondary cursor-pointer'
+					onClick={toggleSidebar}>
+					<X />
+				</div>
+			</div>
 			<div className='flex flex-col'>
 				<p className='px-3 pt-4 pb-2 text-sm font-medium text-secondary-foreground'>
 					Navigation

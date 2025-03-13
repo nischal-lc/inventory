@@ -1,5 +1,5 @@
 import Card from "@/components/dashboard/Card";
-import ProductCard from "@/components/ui/ProductCard";
+import TopProducts from "@/components/dashboard/TopProducts";
 import { DollarSign, Package, TrendingUp, TriangleAlert } from "lucide-react";
 import React from "react";
 
@@ -40,49 +40,7 @@ const Dashboard = () => {
 				Insights
 			</p>
 			<div className='grid grid-rows-2 md:grid-cols-2 md:grid-rows-none gap-2 my-2 min-h-[100vh]'>
-				<div className='border rounded-md px-4 max-h-96 overflow-y-auto customScroll'>
-					<div className='bg-background pt-4 sticky top-0'>
-						<h1 className='text-xl font-semibold'>Top selling</h1>
-						<hr className='mt-1' />
-					</div>
-					<div className='pb-2 '>
-						<ProductCard
-							name='Really long name here'
-							rating={4}
-							image='/images/placeholderImg.svg'
-							sales={100}
-							inStock={10}
-						/>
-						<ProductCard
-							name='Reallllllly long longo long name here'
-							rating={4}
-							image='/images/placeholderImg.svg'
-							sales={100}
-							inStock={10}
-						/>
-						<ProductCard
-							name='Really long name here'
-							rating={4}
-							image='/images/placeholderImg.svg'
-							sales={100}
-							inStock={10}
-						/>
-						<ProductCard
-							name='Really long name here'
-							rating={4}
-							image='/images/placeholderImg.svg'
-							sales={100}
-							inStock={10}
-						/>
-						<ProductCard
-							name='Really long name here'
-							rating={4}
-							image='/images/placeholderImg.svg'
-							sales={100}
-							inStock={10}
-						/>
-					</div>
-				</div>
+				<TopProducts />
 				<div className='border  rounded-md'></div>
 			</div>
 		</div>
