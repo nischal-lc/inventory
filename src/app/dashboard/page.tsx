@@ -1,12 +1,16 @@
 import Card from "@/components/dashboard/Card";
+import ProductCard from "@/components/ui/ProductCard";
 import { DollarSign, Package, TrendingUp, TriangleAlert } from "lucide-react";
 import React from "react";
 
 const Dashboard = () => {
 	return (
-		<div className='px-7 mt-6'>
+		<div className='px-7 mt-2'>
 			<h1 className=' text-xl font-bold'>Dashboard</h1>
-			<div className='my-7 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
+			<p className='mt-1 pt-4 pb-2 text-sm font-medium text-secondary-foreground'>
+				Overview
+			</p>
+			<div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
 				<Card
 					title='Total items'
 					icon={<Package className='size-5' />}
@@ -26,11 +30,60 @@ const Dashboard = () => {
 					subtext='+20.1% from last month'
 				/>
 				<Card
-					title='Inventory Turnover'
+					title='Total Sales'
 					icon={<TrendingUp className='size-5' />}
-					quantity='100'
+					quantity='12,507'
 					subtext='+2.5% more than last month'
 				/>
+			</div>
+			<p className='pt-4 text-sm font-medium text-secondary-foreground'>
+				Insights
+			</p>
+			<div className='grid grid-rows-2 md:grid-cols-2 md:grid-rows-none gap-2 my-2 min-h-[100vh]'>
+				<div className='border rounded-md px-4 max-h-96 overflow-y-auto customScroll'>
+					<div className='bg-background pt-4 sticky top-0'>
+						<h1 className='text-xl font-semibold'>Top selling</h1>
+						<hr className='mt-1' />
+					</div>
+					<div className='pb-2 '>
+						<ProductCard
+							name='Really long name here'
+							rating={4}
+							image='/images/placeholderImg.svg'
+							sales={100}
+							inStock={10}
+						/>
+						<ProductCard
+							name='Reallllllly long longo long name here'
+							rating={4}
+							image='/images/placeholderImg.svg'
+							sales={100}
+							inStock={10}
+						/>
+						<ProductCard
+							name='Really long name here'
+							rating={4}
+							image='/images/placeholderImg.svg'
+							sales={100}
+							inStock={10}
+						/>
+						<ProductCard
+							name='Really long name here'
+							rating={4}
+							image='/images/placeholderImg.svg'
+							sales={100}
+							inStock={10}
+						/>
+						<ProductCard
+							name='Really long name here'
+							rating={4}
+							image='/images/placeholderImg.svg'
+							sales={100}
+							inStock={10}
+						/>
+					</div>
+				</div>
+				<div className='border  rounded-md'></div>
 			</div>
 		</div>
 	);

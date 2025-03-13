@@ -83,7 +83,7 @@
   --popover-foreground: oklch(0.98 0.007 167);
   --card: oklch(0.02 0.025 167);
   --card-foreground: oklch(0.98 0.007 167);
-  --border: oklch(100 0.002 0 / 0.1);
+  --border: oklch(100 0.002 0 / 0.2);
   --input: oklch(0.15 0.002 167);
   --primary: oklch(0.38 0.14 167);
   --primary-foreground: oklch(1 0 0);
@@ -114,4 +114,22 @@
 
 body {
   font-family: var(--font-inter);
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.4);
+  border-radius: 6px;
+}
+
+.customScroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.6);
+}
+
+.customScroll::-webkit-scrollbar-track {
+  background: transparent;
 }

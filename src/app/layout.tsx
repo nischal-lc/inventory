@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/contextProviders/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
 import Sidebar from "@/components/ui/Sidebar";
+import { SidebarProvider } from "@/contextProviders/SidebarProvider";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -28,6 +29,7 @@ export default function RootLayout({
 					defaultTheme='system'
 					enableSystem
 					disableTransitionOnChange>
+					<SidebarProvider>
 					<div className='flex'>
 						<Sidebar />
 						<div className='flex flex-col w-full'>
@@ -35,6 +37,7 @@ export default function RootLayout({
 							{children}
 						</div>
 					</div>
+					</SidebarProvider>
 				</ThemeProvider>
 			</body>
 		</html>

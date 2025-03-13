@@ -10,7 +10,7 @@ import {
 	ShoppingCart,
 	Truck,
 	LogOut,
-  CircleDollarSign,
+	CircleDollarSign,
 } from "lucide-react";
 import React, { useState } from "react";
 import {
@@ -19,6 +19,7 @@ import {
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import { useSidebar } from "@/contextProviders/SidebarProvider";
 
 interface LIprops {
 	icon: React.ReactNode;
@@ -27,11 +28,17 @@ interface LIprops {
 }
 
 const Sidebar = () => {
-	const [isInvOpen, setIsInvOpen] = useState<boolean>(false);
-	const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+	const [isInvOpen, setIsInvOpen] = useState<boolean>(true);
+	const [isAdminOpen, setIsAdminOpen] = useState<boolean>(true);
+	const { isOpen } = useSidebar();
 
 	return (
-		<div className='min-w-[250px] h-screen border-r sticky top-0 overflow-y-auto'>
+		<div
+			className={` h-screen transition-all duration-200 border-r fixed md:sticky bg-background z-50 top-0 overflow-y-auto customScroll ${
+				isOpen
+					? "clip-path-none  min-w-[200px] w-[270px] opacity-100 visible"
+					: "clip-path-inset-0 w-0 opacity-0 invisible"
+			}`}>
 			<p className='flex gap-1 items-center font-bold text-lg border-b px-3 h-[67px] sticky top-0 '>
 				<Package2 className='size-5' />
 				InvManage
@@ -51,7 +58,7 @@ const Sidebar = () => {
 				</ul>
 				<Collapsible open={isInvOpen} onOpenChange={setIsInvOpen}>
 					<div className='flex justify-between items-center px-3'>
-						<p className=' pt-4 pb-2 text-sm font-medium text-secondary-foreground'>
+						<p className='text-nowrap pt-4 pb-2 text-sm font-medium text-secondary-foreground'>
 							Inventory Management
 						</p>
 						<CollapsibleTrigger asChild>
@@ -102,7 +109,7 @@ const Sidebar = () => {
 				<ListItem
 					icon={<LogOut className='size-5' />}
 					text='Log out'
-					className='my-3'
+					className='mt-3'
 				/>
 			</div>
 		</div>

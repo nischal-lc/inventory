@@ -9,16 +9,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { useSidebar } from "@/contextProviders/SidebarProvider";
 
 const Navbar = () => {
 	const { setTheme } = useTheme();
 	const [notificationNumber] = useState<string>("");
+	const { toggleSidebar, isOpen } = useSidebar();
 
 	return (
-		<div className='w-full flex items-center justify-between px-7 py-3 border-b shadow-sm bg-background'>
+		<div className='w-full sticky top-0 z-50 flex items-center justify-between px-7 py-3 border-b shadow-sm bg-background'>
 			<div className='flex gap-3 items-center'>
-				<Menu className='size-5 cursor-pointer' />
-				<p className='flex md:hidden gap-1 items-center font-bold text-lg'>
+				<div
+					className='p-2 hover:border-border border border-accent bg-accent rounded-full active:scale-105'
+					onClick={toggleSidebar}>
+					<Menu className='size-5 cursor-pointer' />
+					<span className='sr-only'>toggle sidebar</span>
+				</div>
+				<p
+					className={` ${
+						isOpen ? "opacity-0 invisible" : " opacity-100 visible"
+					} gap-1 items-center font-bold select-none flex text-lg transition-all duration-100`}>
 					<Package2 className='size-5' />
 					InvManage
 				</p>
