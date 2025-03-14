@@ -31,16 +31,14 @@ const ProductCard = ({
 				className='object-contain rounded-md'
 			/>
 			<div className='flex flex-col px-3 gap-1 w-full'>
-				<div className='flex justify-between group'>
-					<div>
-						<div className='text-nowrap max-w-52 text-ellipsis overflow-hidden'>
-							<p className='truncate font-medium'>{name}</p>
-						</div>
-					</div>
-					<ChevronRight className='size-4' />
+				<div className='flex justify-between items-center group w-full min-w-0'>
+					<p className='truncate font-medium min-w-0 flex-1 sm:max-w-full max-w-[150px]'>
+						{name}
+					</p>
+					<ChevronRight className='size-4 flex-shrink-0' />
 				</div>
-				<div className='flex w-full justify-between'>
-					<div className='flex  items-center gap-2 '>
+				<div className='flex w-full justify-between items-end'>
+					<div className='flex  flex-col md:flex-row md:items-center gap-2 '>
 						<div className='flex items-center '>
 							{Array.from({ length: rating }, (_, index) => (
 								<span
@@ -57,19 +55,21 @@ const ProductCard = ({
 								</span>
 							))}
 						</div>
-						<p className='text-sm text-secondary-foreground'>{sales} sales</p>
-						<p className='text-sm text-secondary-foreground'>
-							<span
-								className={`font-semibold	${
-									inStock < LOW_STOCK_THRESHOLD && "text-red-500"
-								}`}>
-								{inStock}{" "}
-							</span>
-							in stock
-						</p>
+						<div className='flex md:gap-2 flex-col md:flex-row '>
+							<p className='text-sm text-secondary-foreground'>{sales} sales</p>
+							<p className='text-sm text-secondary-foreground'>
+								<span
+									className={`font-semibold	${
+										inStock < LOW_STOCK_THRESHOLD && "text-red-500"
+									}`}>
+									{inStock}{" "}
+								</span>
+								in stock
+							</p>
+						</div>
 					</div>
 					{inStock < LOW_STOCK_THRESHOLD && (
-						<Badge className='bg-red-600/30 border border-red-500 rounded-full'>
+						<Badge className='bg-red-600/30 border border-red-500 rounded-full max-h-max'>
 							Low Stock
 						</Badge>
 					)}

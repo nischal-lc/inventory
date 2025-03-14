@@ -1,17 +1,35 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 interface CardProps {
 	title: string;
 	icon: React.ReactNode;
 	quantity: string;
-	subtext: string;
+	subtext?: string;
+	className?: string;
+	titleClass?: string;
 }
 
-const Card = ({ title, icon, quantity, subtext }: CardProps) => {
+const Card = ({
+	title,
+	icon,
+	quantity,
+	subtext,
+	className,
+	titleClass,
+}: CardProps) => {
 	return (
-		<div className='min-h-[70px] w-full rounded-md border px-4 py-7 shadow-sm'>
+		<div
+			className={cn(
+				" w-full rounded-md border px-4 py-7 shadow-sm",
+				className
+			)}>
 			<div className='flex justify-between items-center'>
-				<p className='font-medium text-sm text-secondary-foreground select-none'>
+				<p
+					className={
+						(cn("font-medium text-sm text-secondary-foreground select-none"),
+						titleClass)
+					}>
 					{title}
 				</p>
 				<span className='text-secondary-foreground'>{icon}</span>

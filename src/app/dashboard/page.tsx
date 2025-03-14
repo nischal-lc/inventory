@@ -1,15 +1,28 @@
 import Card from "@/components/dashboard/Card";
+import RecentActivites from "@/components/dashboard/RecentActivites";
+import Summary from "@/components/dashboard/Summary";
 import TopProducts from "@/components/dashboard/TopProducts";
-import { DollarSign, Package, TrendingUp, TriangleAlert } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import LayoutLabel from "@/components/ui/LayoutLabel";
+import {
+	DollarSign,
+	Package,
+	Plus,
+	TrendingUp,
+	TriangleAlert,
+} from "lucide-react";
 import React from "react";
 
 const Dashboard = () => {
 	return (
 		<div className='px-7 mt-2'>
-			<h1 className=' text-xl font-bold'>Dashboard</h1>
-			<p className='mt-1 pt-4 pb-2 text-sm font-medium text-secondary-foreground'>
-				Overview
-			</p>
+			<div className='flex justify-between'>
+				<h1 className=' text-xl font-bold'>Dashboard</h1>
+				<Button variant='secondary' className="cursor-pointer text-white">
+					<Plus /> Add new product
+				</Button>
+			</div>
+			<LayoutLabel>Overview</LayoutLabel>
 			<div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>
 				<Card
 					title='Total items'
@@ -36,12 +49,13 @@ const Dashboard = () => {
 					subtext='+2.5% more than last month'
 				/>
 			</div>
-			<p className='pt-4 text-sm font-medium text-secondary-foreground'>
-				Insights
-			</p>
-			<div className='grid grid-rows-2 md:grid-cols-2 md:grid-rows-none gap-2 my-2 min-h-[100vh]'>
+			<LayoutLabel>Insights</LayoutLabel>
+			<div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none gap-2 my-2 '>
 				<TopProducts />
-				<div className='border  rounded-md'></div>
+				<Summary />
+			</div>
+			<div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none gap-2 my-2 '>
+				<RecentActivites />
 			</div>
 		</div>
 	);
