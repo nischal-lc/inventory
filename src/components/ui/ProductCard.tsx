@@ -3,14 +3,9 @@ import Image from "next/image";
 import React from "react";
 import { Badge } from "./badge";
 import { LOW_STOCK_THRESHOLD } from "@/lib/datas";
+import { ProductCardProps } from "@/lib/types";
 
-interface ProductCardProps {
-	name: string;
-	sales: number;
-	rating: number;
-	inStock: number;
-	image: string;
-}
+
 const ProductCard = ({
 	name,
 	sales,

@@ -1,14 +1,7 @@
+import { CardProps } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import React from "react";
 
-interface CardProps {
-	title: string;
-	icon: React.ReactNode;
-	quantity: string;
-	subtext?: string;
-	className?: string;
-	titleClass?: string;
-}
 
 const Card = ({
 	title,

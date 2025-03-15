@@ -1,10 +1,6 @@
 "use client";
+import { SidebarContextType } from "@/lib/types";
 import React, { createContext, useContext, useState } from "react";
-
-interface SidebarContextType {
-	isOpen: boolean;
-	toggleSidebar: () => void;
-}
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 

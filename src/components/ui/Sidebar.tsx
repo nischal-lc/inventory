@@ -22,11 +22,6 @@ import {
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/contextProviders/SidebarProvider";
 
-interface LIprops {
-	icon: React.ReactNode;
-	text: string;
-	className?: string;
-}
 
 const Sidebar = () => {
 	const [isInvOpen, setIsInvOpen] = useState<boolean>(true);

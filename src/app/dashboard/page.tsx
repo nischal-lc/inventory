@@ -1,4 +1,5 @@
 import Card from "@/components/dashboard/Card";
+import QuickActions from "@/components/dashboard/QuickActions";
 import RecentActivites from "@/components/dashboard/RecentActivites";
 import Summary from "@/components/dashboard/Summary";
 import TopProducts from "@/components/dashboard/TopProducts";
@@ -15,7 +16,7 @@ import React from "react";
 
 const Dashboard = () => {
 	return (
-		<div className='px-7 mt-2'>
+		<div className='md:px-7 px-3 mt-2'>
 			<div className='flex justify-between'>
 				<h1 className=' text-xl font-bold'>Dashboard</h1>
 				<Button variant='secondary' className="cursor-pointer text-white">
@@ -50,12 +51,13 @@ const Dashboard = () => {
 				/>
 			</div>
 			<LayoutLabel>Insights</LayoutLabel>
-			<div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none gap-2 my-2 '>
+			<div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none gap-2 mt-2 mb-4'>
 				<TopProducts />
 				<Summary />
 			</div>
-			<div className='grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none gap-2 my-2 '>
+			<div className='flex flex-col lg:flex-row gap-2 my-2 '>
 				<RecentActivites />
+				<QuickActions />
 			</div>
 		</div>
 	);

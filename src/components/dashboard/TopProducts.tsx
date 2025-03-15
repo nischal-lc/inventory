@@ -2,46 +2,28 @@ import React from "react";
 import ProductCard from "@/components/ui/ProductCard";
 import { Flame } from "lucide-react";
 import InsightsLayout from "./InsightsLayout";
+import { productCards } from "@/lib/datas";
 
 const TopProducts = () => {
 	return (
 		<>
 			<InsightsLayout title='Top selling products' icon={<Flame />}>
-				<ProductCard
-					name='Really long name here'
-					rating={5}
-					image='/images/placeholderImg.svg'
-					sales={100}
-					inStock={512}
-				/>
-				<ProductCard
-					name='Reallllllly long longo long name here'
-					rating={4}
-					image='/images/placeholderImg.svg'
-					sales={100}
-					inStock={8}
-				/>
-				<ProductCard
-					name='Really long name here'
-					rating={6}
-					image='/images/placeholderImg.svg'
-					sales={100}
-					inStock={4}
-				/>
-				<ProductCard
-					name='Really long name here'
-					rating={4}
-					image='/images/placeholderImg.svg'
-					sales={100}
-					inStock={10}
-				/>
-				<ProductCard
-					name='Really long name here'
-					rating={4}
-					image='/images/placeholderImg.svg'
-					sales={100}
-					inStock={10}
-				/>
+				{productCards.length > 0 ? (
+					productCards.map((item, index) => (
+						<ProductCard
+							key={index}
+							image={item.image}
+							inStock={item.inStock}
+							name={item.name}
+							rating={item.rating}
+							sales={item.sales}
+						/>
+					))
+				) : (
+					<p className='text-center py-12 text-secondary-foreground/70 select-none'>
+						No data available	
+					</p>
+				)}
 			</InsightsLayout>
 		</>
 	);
