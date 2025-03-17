@@ -45,38 +45,38 @@ const Card = ({ type, info, by, time, name }: RecentCardProps) => {
 	const typeData = {
 		"stock-update": {
 			icon: <Box />,
-			color: "blue-500",
+			color: "text-blue-500",
 			title: "Stock Updated",
 		},
 		"new-order": {
 			icon: <ShoppingCart />,
-			color: "green-500",
+			color: "text-green-500",
 			title: "New Order Received",
 		},
 		"low-stock": {
 			icon: <AlertTriangle />,
-			color: "yellow-500",
+			color: "text-yellow-500",
 			title: "Low Stock Alert",
 		},
 		"order-done": {
 			icon: <PackageCheck />,
-			color: "purple-500",
+			color: "text-purple-500",
 			title: "Order Completed",
 		},
 		"new-product": {
 			icon: <PackagePlus />,
-			color: "pink-500",
+			color: "text-pink-500",
 			title: "New Product Added",
 		},
 	};
 	const { icon, title, color } = typeData[type];
 	return (
 		<div className='bg-accent rounded-md flex gap-3 px-3 py-4 mt-2 group cursor-pointer'>
-			<div className={`p-2 text-${color}  bg-white/10  rounded-full max-h-max`}>
+			<div className={`p-2 ${color}  bg-white/10  rounded-full max-h-max`}>
 				{icon}
 			</div>
 			<div className='flex flex-col min-w-0'>
-				<p className={`font-semibold text-lg truncate text-${color}`}>
+				<p className={`font-semibold text-lg truncate ${color}`}>
 					{title}
 				</p>
 				<p className='text-[15px] text-neutral-900 text-medium dark:text-neutral-300'>

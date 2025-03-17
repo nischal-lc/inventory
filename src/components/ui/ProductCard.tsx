@@ -51,10 +51,10 @@ const ProductCard = ({
 							))}
 						</div>
 						<div className='flex md:gap-2 flex-col md:flex-row '>
-							<p className='text-sm text-secondary-foreground'>{sales} sales</p>
+							<p className='text-sm text-secondary-foreground'><span className="geist">{sales}</span> sales</p>
 							<p className='text-sm text-secondary-foreground'>
 								<span
-									className={`font-semibold	${
+									className={`font-semibold geist	${
 										inStock < LOW_STOCK_THRESHOLD && "text-red-500"
 									}`}>
 									{inStock}{" "}

@@ -16,7 +16,7 @@ const Navbar = () => {
 	const [notificationNumber] = useState<string>("");
 	const { toggleSidebar, isOpen } = useSidebar();
 
-	return (	
+	return (
 		<div className='w-full sticky top-0 z-50 flex items-center justify-between px-7 py-3 border-b shadow-sm bg-background'>
 			<div className='flex gap-3 items-center'>
 				<div
@@ -27,7 +27,7 @@ const Navbar = () => {
 				</div>
 				<p
 					className={` ${
-						isOpen ? "opacity-0 invisible" : " opacity-100 visible"
+						isOpen ? "opacity-0 invisible" : "opacity-100 visible"
 					} gap-1 items-center font-bold select-none flex text-lg transition-all duration-100`}>
 					<Package2 className='size-5' />
 					InvManage

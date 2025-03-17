@@ -7,7 +7,7 @@ import { productCards } from "@/lib/datas";
 const TopProducts = () => {
 	return (
 		<>
-			<InsightsLayout title='Top selling products' icon={<Flame />}>
+			<InsightsLayout className="lg:w-3/4 w-full" title='Top selling products' icon={<Flame />}>
 				{productCards.length > 0 ? (
 					productCards.map((item, index) => (
 						<ProductCard

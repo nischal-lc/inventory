@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contextProviders/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
@@ -10,6 +10,12 @@ const inter = Inter({
 	variable: "--font-inter",
 	subsets: ["latin"],
 });
+
+const geist = Geist({
+	variable: "--font-geist",
+	subsets: ["latin"],
+
+})
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -23,7 +29,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={`${inter.variable} antialiased`}>
+			<body className={`${inter.variable} ${geist.variable} antialiased`}>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'

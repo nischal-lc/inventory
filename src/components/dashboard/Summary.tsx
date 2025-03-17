@@ -13,6 +13,7 @@ const Summary = () => {
 	return (
 		<>
 			<InsightsLayout
+			className="lg:w-1/4 w-full"
 				title='Inventory Summary'
 				icon={<FileChartColumnIncreasing />}>
 				<div className="mt-3 space-y-2">

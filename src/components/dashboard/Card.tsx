@@ -27,7 +27,7 @@ const Card = ({
 				</p>
 				<span className='text-secondary-foreground'>{icon}</span>
 			</div>
-			<h4 className='text-3xl mt-2 font-semibold'>{quantity}</h4>
+			<h4 className='text-3xl mt-2 font-semibold geist'>{quantity}</h4>
 			<p className='text-[12px] text-secondary-foreground'>{subtext}</p>
 		</div>
 	);
