@@ -1,6 +1,7 @@
 import { ProductCardProps, RecentCardProps } from "./types";
 
 export const LOW_STOCK_THRESHOLD = 100;
+const TOTAL_ITEMS = 1500;
 export const recentActivities:RecentCardProps[] = [
     {
       type: "low-stock",
@@ -105,4 +106,21 @@ export const recentActivities:RecentCardProps[] = [
       { month: "Oct", sales: 122000, inventory: 134500 },
       { month: "Nov", sales: 130000, inventory: 138000 },
       { month: "Dec", sales: 145000, inventory: 142500 },
+    ]
+
+  export const barChartData = [
+    { type: "Electronics", quantity: 186 },
+    { type: "Clothing", quantity: 305 },
+    { type: "Home Goods", quantity: 237 },
+    { type: "Sports", quantity: 73 },
+    { type: "Books", quantity: 209 },
+    { type: "Toys", quantity: 214 },
+  ]
+
+  export const pieChartData = [
+    { type: "electronics", quantity: parseFloat(((278 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-electronics)" },
+    { type: "clothing", quantity: parseFloat(((312 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-clothing)" },
+    { type: "homeGoods", quantity: parseFloat(((195 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-homeGoods)" },
+    { type: "sports", quantity: parseFloat(((410 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-sports)" },
+    { type: "other", quantity: parseFloat(((305 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-other)" },
     ]

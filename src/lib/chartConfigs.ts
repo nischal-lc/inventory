@@ -18,3 +18,37 @@ export const salesInvConfig = {
 		color: "var(--chart-2)",
 	  },
 }satisfies ChartConfig;
+
+export const barChartConfig = {
+	quantity: {
+	  label: "Stock level",
+	  color: "var(--chart-4)",
+	},
+  } satisfies ChartConfig
+
+
+export const  pieChartConfig  = {
+	quantity: {
+	  label: "Distribution Percentage: ",
+	},
+	electronics: {
+	  label: "Electronics",
+	  color: "var(--chart-1)",
+	},
+	clothing: {
+	  label: "Clothing",
+	  color: "var(--chart-2)",
+	},
+	homeGoods: {
+	  label: "Home Goods",	
+	  color: "var(--chart-3)",
+	},
+	sports: {
+	  label: "Sports",
+	  color: "var(--chart-4)",
+	},
+	other: {
+	  label: "Other",
+	  color: "var(--chart-5)",
+	},
+  } satisfies ChartConfig
