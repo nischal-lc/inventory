@@ -17,7 +17,7 @@ const ProductCard = ({
 		rating = 5;
 	}
 	return (
-		<div className='flex w-full min-h-max px-3 py-2  mt-2 bg-secondary cursor-pointer hover:bg-background transition duration-100'>
+		<div className='flex w-full min-h-max px-3 py-2  mt-2 bg-secondary cursor-pointer border border-accent hover:bg-background transition duration-100 hover:border rounded'>
 			<Image
 				src={image}
 				height={100}

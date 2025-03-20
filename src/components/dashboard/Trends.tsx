@@ -1,5 +1,5 @@
 import React from "react";
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid,  XAxis, YAxis } from "recharts";
 import {
 	ChartContainer,
 	ChartTooltip,
@@ -17,7 +17,7 @@ const Trends = () => {
 			</p>
 			<div className='h-[350px] w-full'>
 				<ChartContainer className='mt-6 h-full w-full' config={chartConfig}>
-					<LineChart
+					<AreaChart
 						accessibilityLayer
 						data={overviewData}
 						margin={{
@@ -43,9 +43,9 @@ const Trends = () => {
 						/>
 						<ChartTooltip
 							cursor={false}
-							content={<ChartTooltipContent hideLabel />}
+							content={<ChartTooltipContent indicator="dot" hideLabel />}
 						/>
-						<Line
+						<Area
 							dataKey='value'
 							type='monotone'
 							stroke='var(--color-value)'
@@ -54,7 +54,7 @@ const Trends = () => {
 								r: 6,
 							}}
 						/>
-					</LineChart>
+					</AreaChart>
 				</ChartContainer>
 			</div>
 		</div>

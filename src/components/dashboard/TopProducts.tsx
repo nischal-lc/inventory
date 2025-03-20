@@ -9,7 +9,7 @@ const TopProducts = () => {
 		<>
 			<InsightsLayout className="lg:w-3/4 w-full" title='Top selling products' icon={<Flame />}>
 				{productCards.length > 0 ? (
-					productCards.map((item, index) => (
+					productCards.sort((a,b)=>b.sales- a.sales).slice(0,8).map((item,index)=>(
 						<ProductCard
 							key={index}
 							image={item.image}

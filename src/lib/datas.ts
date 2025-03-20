@@ -41,41 +41,31 @@ export const recentActivities:RecentCardProps[] = [
   ];
 
  export const productCards: ProductCardProps[] = [
-    {
-      name: "Really long name here",
-      rating: 5,
-      image: "/images/placeholderImg.svg",
-      sales: 100,
-      inStock: 512,
-    },
-    {
-      name: "Reallllllly long longo long name here",
-      rating: 4,
-      image: "/images/placeholderImg.svg",
-      sales: 100,
-      inStock: 8,
-    },
-    {
-      name: "Really long name here",
-      rating: 6,
-      image: "/images/placeholderImg.svg",
-      sales: 100,
-      inStock: 4,
-    },
-    {
-      name: "Really long name here",
-      rating: 4,
-      image: "/images/placeholderImg.svg",
-      sales: 100,
-      inStock: 10,
-    },
-    {
-      name: "Really long name here",
-      rating: 4,
-      image: "/images/placeholderImg.svg",
-      sales: 100,
-      inStock: 10,
-    },
+  { name: "Ultra Gaming Mouse X1000", rating: 5, image: "/images/placeholderImg.svg", sales: 250, inStock: 30 },
+  { name: "Mechanical Keyboard Pro V2", rating: 4, image: "/images/placeholderImg.svg", sales: 180, inStock: 15 },
+  { name: "Wireless Noise-Canceling Headphones", rating: 4, image: "/images/placeholderImg.svg", sales: 320, inStock: 8 },
+  { name: "Curved UltraWide Monitor 34 inch", rating: 5, image: "/images/placeholderImg.svg", sales: 150, inStock: 12 },
+  { name: "Ergonomic Gaming Chair Deluxe", rating: 5, image: "/images/placeholderImg.svg", sales: 275, inStock: 20 },
+  { name: "RGB Mechanical Gaming Keyboard", rating: 4, image: "/images/placeholderImg.svg", sales: 210, inStock: 25 },
+  { name: "4K Webcam for Streaming", rating: 5, image: "/images/placeholderImg.svg", sales: 95, inStock: 10 },
+  { name: "USB-C Docking Station", rating: 4, image: "/images/placeholderImg.svg", sales: 130, inStock: 18 },
+  { name: "Smart LED Desk Lamp", rating: 4, image: "/images/placeholderImg.svg", sales: 175, inStock: 5 },
+  { name: "Portable Bluetooth Speaker", rating: 5, image: "/images/placeholderImg.svg", sales: 220, inStock: 14 },
+  { name: "Gaming Headset with Surround Sound", rating: 4, image: "/images/placeholderImg.svg", sales: 195, inStock: 22 },
+  { name: "External SSD 1TB", rating: 5, image: "/images/placeholderImg.svg", sales: 285, inStock: 6 },
+  { name: "Smartwatch Pro Edition", rating: 4, image: "/images/placeholderImg.svg", sales: 165, inStock: 10 },
+  { name: "Adjustable Standing Desk", rating: 5, image: "/images/placeholderImg.svg", sales: 290, inStock: 9 },
+  { name: "Noise-Isolating Earbuds", rating: 4, image: "/images/placeholderImg.svg", sales: 140, inStock: 11 },
+  { name: "Triple Monitor Mount Stand", rating: 5, image: "/images/placeholderImg.svg", sales: 230, inStock: 13 },
+  { name: "High-Speed WiFi Router", rating: 4, image: "/images/placeholderImg.svg", sales: 310, inStock: 16 },
+  { name: "Gaming Capture Card", rating: 5, image: "/images/placeholderImg.svg", sales: 120, inStock: 17 },
+  { name: "Mechanical Numpad for Productivity", rating: 4, image: "/images/placeholderImg.svg", sales: 135, inStock: 19 },
+  { name: "Wireless Charging Pad", rating: 5, image: "/images/placeholderImg.svg", sales: 190, inStock: 7 },
+  { name: "Ultra HD 4K Projector", rating: 5, image: "/images/placeholderImg.svg", sales: 275, inStock: 4 },
+  { name: "Programmable Macro Keypad", rating: 4, image: "/images/placeholderImg.svg", sales: 160, inStock: 20 },
+  { name: "Smart Home Security Camera", rating: 5, image: "/images/placeholderImg.svg", sales: 245, inStock: 6 },
+  { name: "Compact Mechanical Gaming Keyboard", rating: 4, image: "/images/placeholderImg.svg", sales: 155, inStock: 21 },
+  { name: "USB Microphone for Streaming", rating: 5, image: "/images/placeholderImg.svg", sales: 280, inStock: 12 }
   ];
   
   export const overviewData = [
