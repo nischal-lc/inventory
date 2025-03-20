@@ -39,3 +39,12 @@ export interface SidebarContextType {
 	isOpen: boolean;
 	toggleSidebar: () => void;
 }
+
+export interface allProductsProps {
+	id: string;
+    image: string;
+    name: string;
+    sales: number,
+    inStock: number,
+    orderPending: boolean,
+}

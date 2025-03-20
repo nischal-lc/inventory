@@ -2,14 +2,14 @@ import React from "react";
 import ProductCard from "@/components/ui/ProductCard";
 import { Flame } from "lucide-react";
 import InsightsLayout from "./InsightsLayout";
-import { productCards } from "@/lib/datas";
+import { popularProducts } from "@/lib/datas";
 
 const TopProducts = () => {
 	return (
 		<>
 			<InsightsLayout className="lg:w-3/4 w-full" title='Top selling products' icon={<Flame />}>
-				{productCards.length > 0 ? (
-					productCards.sort((a,b)=>b.sales- a.sales).slice(0,8).map((item,index)=>(
+				{popularProducts.length > 0 ? (
+					popularProducts.sort((a,b)=>b.sales- a.sales).slice(0,8).map((item,index)=>(
 						<ProductCard
 							key={index}
 							image={item.image}

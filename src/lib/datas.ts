@@ -1,4 +1,4 @@
-import { ProductCardProps, RecentCardProps } from "./types";
+import { allProductsProps, ProductCardProps, RecentCardProps } from "./types";
 
 export const LOW_STOCK_THRESHOLD = 100;
 const TOTAL_ITEMS = 1500;
@@ -40,7 +40,7 @@ export const recentActivities:RecentCardProps[] = [
     },
   ];
 
- export const productCards: ProductCardProps[] = [
+ export const popularProducts: ProductCardProps[] = [
   { name: "Ultra Gaming Mouse X1000", rating: 5, image: "/images/placeholderImg.svg", sales: 250, inStock: 30 },
   { name: "Mechanical Keyboard Pro V2", rating: 4, image: "/images/placeholderImg.svg", sales: 180, inStock: 15 },
   { name: "Wireless Noise-Canceling Headphones", rating: 4, image: "/images/placeholderImg.svg", sales: 320, inStock: 8 },
@@ -114,3 +114,87 @@ export const recentActivities:RecentCardProps[] = [
     { type: "sports", quantity: parseFloat(((410 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-sports)" },
     { type: "other", quantity: parseFloat(((305 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-other)" },
     ]
+
+
+  export const allProducts: allProductsProps[] = [
+      {
+        id: "P1001",
+        image: "/images/placeholderImg.svg",
+        name: "Gaming Laptop",
+        sales: 320,
+        inStock: 15,
+        orderPending: true,
+      },
+      {
+        id: "P1002",
+        image: "/images/placeholderImg.svg",
+        name: "Wireless Headphones",
+        sales: 540,
+        inStock: 30,
+        orderPending: false,
+      },
+      {
+        id: "P1003",
+        image: "/images/placeholderImg.svg",
+        name: "Smart Watch",
+        sales: 270,
+        inStock: 5,
+        orderPending: true,
+      },
+      {
+        id: "P1004",
+        image: "/images/placeholderImg.svg",
+        name: "Mechanical Keyboard",
+        sales: 150,
+        inStock: 10,
+        orderPending: false,
+      },
+      {
+        id: "P1005",
+        image: "/images/placeholderImg.svg",
+        name: "Gaming Mouse",
+        sales: 410,
+        inStock: 25,
+        orderPending: true,
+      },
+      {
+        id: "P1006",
+        image: "/images/placeholderImg.svg",
+        name: "4K Monitor",
+        sales: 95,
+        inStock: 8,
+        orderPending: false,
+      },
+      {
+        id: "P1007",
+        image: "/images/placeholderImg.svg",
+        name: "External SSD 1TB",
+        sales: 200,
+        inStock: 20,
+        orderPending: true,
+      },
+      {
+        id: "P1008",
+        image: "/images/placeholderImg.svg",
+        name: "Android Smartphone",
+        sales: 670,
+        inStock: 12,
+        orderPending: false,
+      },
+      {
+        id: "P1009",
+        image: "/images/placeholderImg.svg",
+        name: "WiFi 6 Router",
+        sales: 340,
+        inStock: 18,
+        orderPending: false,
+      },
+      {
+        id: "P1010",
+        image: "/images/placeholderImg.svg",
+        name: "RTX 4070 Graphics Card",
+        sales: 50,
+        inStock: 3,
+        orderPending: true,
+      },
+    ];
