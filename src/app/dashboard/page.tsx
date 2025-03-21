@@ -13,6 +13,7 @@ import {
 	TrendingUp,
 	TriangleAlert,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Dashboard = () => {
@@ -20,9 +21,11 @@ const Dashboard = () => {
 		<div className='md:px-7 px-3 mt-2'>
 			<div className='flex justify-between'>
 				<h1 className=' text-2xl font-bold'>Dashboard</h1>
-				<Button variant='default' className='cursor-pointer text-white'>
-					<Plus /> Add new product
-				</Button>
+				<Link href="/inventory/add">
+					<Button variant='default' className='cursor-pointer text-white'>
+						<Plus /> Add new product
+					</Button>
+				</Link>
 			</div>
 			<LayoutLabel>Overview</LayoutLabel>
 			<div className=' grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3'>

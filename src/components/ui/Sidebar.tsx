@@ -22,7 +22,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/contextProviders/SidebarProvider";
 import { LIprops } from "@/lib/types";
-
+import Link from "next/link";
 
 const Sidebar = () => {
 	const [isInvOpen, setIsInvOpen] = useState<boolean>(true);
@@ -52,11 +52,15 @@ const Sidebar = () => {
 					Navigation
 				</p>
 				<ul className='flex flex-col gap-1'>
-					<ListItem
-						icon={<LayoutDashboard className='size-5' />}
-						text='Dashboard'
-					/>
-					<ListItem icon={<Package className='size-5' />} text='Inventory' />
+					<Link href='/dashboard'>
+						<ListItem
+							icon={<LayoutDashboard className='size-5' />}
+							text='Dashboard'
+						/>
+					</Link>
+					<Link href='/inventory'>
+						<ListItem icon={<Package className='size-5' />} text='Inventory' />
+					</Link>
 					<ListItem icon={<ChartColumn className='size-5' />} text='Reports' />
 					<ListItem icon={<Users className='size-5' />} text='Users' />
 				</ul>

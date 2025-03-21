@@ -42,9 +42,10 @@ export interface SidebarContextType {
 
 export interface allProductsProps {
 	id: string;
-    image: string;
     name: string;
-    sales: number,
-    inStock: number,
-    orderPending: boolean,
+    sales: number;
+	price: number;
+    inStock: number;
+    supplier: string;
+	category: string;
 }

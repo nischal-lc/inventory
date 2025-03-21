@@ -17,7 +17,7 @@ const Navbar = () => {
 	const { toggleSidebar, isOpen } = useSidebar();
 
 	return (
-		<div className='w-full sticky top-0 z-50 flex items-center justify-between px-7 py-3 border-b shadow-sm bg-background'>
+		<div className='w-full sticky top-0 z-50 flex items-center justify-between px-7 py-3 border-b shadow-sm bg-background '>
 			<div className='flex gap-3 items-center'>
 				<div
 					className='p-2 hover:border-border cursor-pointer border border-accent bg-accent rounded-full active:scale-105'
