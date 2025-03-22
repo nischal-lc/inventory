@@ -1,7 +1,23 @@
-import { allProductsProps, ProductCardProps, RecentCardProps } from "./types";
+import { pieChartConfig } from "./chartConfigs";
+import {Product, RecentCardProps } from "./types";
 
 export const LOW_STOCK_THRESHOLD = 100;
 const TOTAL_ITEMS = 1500;
+
+export async function fetchProductData() {
+  try {
+      const response = await fetch("/api/products");
+      if (!response.ok) {
+          throw new Error("Failed to fetch product data");
+      }
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error("Error fetching product data:", error);
+      return [];
+  }
+}
+
 export const recentActivities:RecentCardProps[] = [
     {
       type: "low-stock",
@@ -40,34 +56,6 @@ export const recentActivities:RecentCardProps[] = [
     },
   ];
 
- export const popularProducts: ProductCardProps[] = [
-  { name: "Ultra Gaming Mouse X1000", rating: 5, image: "/images/placeholderImg.svg", sales: 250, inStock: 30 },
-  { name: "Mechanical Keyboard Pro V2", rating: 4, image: "/images/placeholderImg.svg", sales: 180, inStock: 15 },
-  { name: "Wireless Noise-Canceling Headphones", rating: 4, image: "/images/placeholderImg.svg", sales: 320, inStock: 8 },
-  { name: "Curved UltraWide Monitor 34 inch", rating: 5, image: "/images/placeholderImg.svg", sales: 150, inStock: 12 },
-  { name: "Ergonomic Gaming Chair Deluxe", rating: 5, image: "/images/placeholderImg.svg", sales: 275, inStock: 20 },
-  { name: "RGB Mechanical Gaming Keyboard", rating: 4, image: "/images/placeholderImg.svg", sales: 210, inStock: 25 },
-  { name: "4K Webcam for Streaming", rating: 5, image: "/images/placeholderImg.svg", sales: 95, inStock: 10 },
-  { name: "USB-C Docking Station", rating: 4, image: "/images/placeholderImg.svg", sales: 130, inStock: 18 },
-  { name: "Smart LED Desk Lamp", rating: 4, image: "/images/placeholderImg.svg", sales: 175, inStock: 5 },
-  { name: "Portable Bluetooth Speaker", rating: 5, image: "/images/placeholderImg.svg", sales: 220, inStock: 14 },
-  { name: "Gaming Headset with Surround Sound", rating: 4, image: "/images/placeholderImg.svg", sales: 195, inStock: 22 },
-  { name: "External SSD 1TB", rating: 5, image: "/images/placeholderImg.svg", sales: 285, inStock: 6 },
-  { name: "Smartwatch Pro Edition", rating: 4, image: "/images/placeholderImg.svg", sales: 165, inStock: 10 },
-  { name: "Adjustable Standing Desk", rating: 5, image: "/images/placeholderImg.svg", sales: 290, inStock: 9 },
-  { name: "Noise-Isolating Earbuds", rating: 4, image: "/images/placeholderImg.svg", sales: 140, inStock: 11 },
-  { name: "Triple Monitor Mount Stand", rating: 5, image: "/images/placeholderImg.svg", sales: 230, inStock: 13 },
-  { name: "High-Speed WiFi Router", rating: 4, image: "/images/placeholderImg.svg", sales: 310, inStock: 16 },
-  { name: "Gaming Capture Card", rating: 5, image: "/images/placeholderImg.svg", sales: 120, inStock: 17 },
-  { name: "Mechanical Numpad for Productivity", rating: 4, image: "/images/placeholderImg.svg", sales: 135, inStock: 19 },
-  { name: "Wireless Charging Pad", rating: 5, image: "/images/placeholderImg.svg", sales: 190, inStock: 7 },
-  { name: "Ultra HD 4K Projector", rating: 5, image: "/images/placeholderImg.svg", sales: 275, inStock: 4 },
-  { name: "Programmable Macro Keypad", rating: 4, image: "/images/placeholderImg.svg", sales: 160, inStock: 20 },
-  { name: "Smart Home Security Camera", rating: 5, image: "/images/placeholderImg.svg", sales: 245, inStock: 6 },
-  { name: "Compact Mechanical Gaming Keyboard", rating: 4, image: "/images/placeholderImg.svg", sales: 155, inStock: 21 },
-  { name: "USB Microphone for Streaming", rating: 5, image: "/images/placeholderImg.svg", sales: 280, inStock: 12 }
-  ];
-  
   export const overviewData = [
       { month: "Jan", value: 115000 },
       { month: "Feb", value: 118500 },
@@ -98,113 +86,29 @@ export const recentActivities:RecentCardProps[] = [
       { month: "Dec", sales: 145000, inventory: 142500 },
     ]
 
-  export const barChartData = [
-    { type: "Electronics", quantity: 186 },
-    { type: "Clothing", quantity: 305 },
-    { type: "Home Goods", quantity: 237 },
-    { type: "Sports", quantity: 73 },
-    { type: "Books", quantity: 209 },
-    { type: "Toys", quantity: 214 },
-  ]
+  export const barChartData = fetchProductData().then((data)=>{
+    const categories= [...new Set(data.map((item: Product)=>item.category))];
+    const chartData = categories.map((category)=>{
+      const items = data.filter((item: Product)=>item.category === category);
+      const quantity = items.reduce((acc: number, item: Product)=>acc + item.inStock, 0);
+      return {type: category, quantity}
+    })
+    return chartData;
+  })
 
-  export const pieChartData = [
-    { type: "electronics", quantity: parseFloat(((278 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-electronics)" },
-    { type: "clothing", quantity: parseFloat(((312 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-clothing)" },
-    { type: "homeGoods", quantity: parseFloat(((195 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-homeGoods)" },
-    { type: "sports", quantity: parseFloat(((410 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-sports)" },
-    { type: "other", quantity: parseFloat(((305 / TOTAL_ITEMS) * 100).toFixed(2)), fill: "var(--color-other)" },
-    ]
+  export const pieChartData = fetchProductData().then((data)=>{
+    const categories= [...new Set(data.map((item: Product)=>item.category))] as string[];
 
+    const chartData = categories.map((category)=>{
+      const items = data.filter((item: Product)=>item.category === category);
+      const stock: number = items.reduce((acc: number, item: Product)=>acc + item.inStock, 0);
+      const configEntry = pieChartConfig[category as keyof typeof pieChartConfig];
 
-  export const allProducts: allProductsProps[] = [
-      {
-        id: "P1001",
-        name: "Gaming Laptop",
-        sales: 320,
-        inStock: 15,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1002",
-        name: "Wireless Headphones",
-        sales: 540,
-        inStock: 30,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1003",
-        name: "Smart Watch",
-        sales: 270,
-        inStock: 5,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1004",
-        name: "Mechanical Keyboard",
-        sales: 150,
-        inStock: 10,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1005",
-        name: "Gaming Mouse",
-        sales: 410,
-        inStock: 25,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1006",
-        name: "4K Monitor",
-        sales: 95,
-        inStock: 8,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1007",
-        name: "External SSD 1TB",
-        sales: 200,
-        inStock: 20,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1008",
-        name: "Android Smartphone",
-        sales: 670,
-        inStock: 12,
-        supplier: "Acer",
-        price: 1200,
-        category: "Clothing",
-      },
-      {
-        id: "P1009",
-        name: "WiFi 6 Router",
-        sales: 340,
-        inStock: 18,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        id: "P1010",
-        name: "RTX 4070 Graphics Card",
-        sales: 50,
-        inStock: 3,
-        supplier: "Acer",
-        price: 1200,
-        category: "Electronics",
-      },
-    ];
+      return {type: category, quantity: Number(((stock / TOTAL_ITEMS * 100)).toFixed(2)),
+        fill: configEntry && "color" in configEntry ? configEntry.color : "var(--color-other)"
+      }
+      
+    })
+  
+    return chartData;
+  })

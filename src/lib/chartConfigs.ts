@@ -31,19 +31,19 @@ export const  pieChartConfig  = {
 	quantity: {
 	  label: "Distribution Percentage: ",
 	},
-	electronics: {
+	Electronics: {
 	  label: "Electronics",
 	  color: "var(--chart-1)",
 	},
-	clothing: {
+	Clothing: {
 	  label: "Clothing",
 	  color: "var(--chart-2)",
 	},
-	homeGoods: {
+	"Home Appliances": {
 	  label: "Home Goods",	
 	  color: "var(--chart-3)",
 	},
-	sports: {
+	Sports: {
 	  label: "Sports",
 	  color: "var(--chart-4)",
 	},

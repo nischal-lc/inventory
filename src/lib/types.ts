@@ -7,6 +7,18 @@ export interface CardProps {
 	titleClass?: string;
 }
 
+export interface Product {
+	id: string;
+	name: string;
+	sales: number;
+	inStock: number;
+	supplier?: string;
+	rating?: number;
+	image: string;
+	price: number;
+	category?: string;
+  };
+  
 
 export interface RecentCardProps {
 	type:

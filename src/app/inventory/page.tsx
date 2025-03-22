@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -21,13 +21,20 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { ArrowDownNarrowWide, Filter, Pen, Plus, Trash2 } from "lucide-react";
-import { allProducts, LOW_STOCK_THRESHOLD } from "@/lib/datas";
-import { allProductsProps } from "@/lib/types";
+import { fetchProductData, LOW_STOCK_THRESHOLD } from "@/lib/datas";
+import { allProductsProps, Product } from "@/lib/types";
 import Link from "next/link";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Page = () => {
+	const [allProducts, setAllProducts] = useState<Product[]>([]);
+	useEffect(() => {
+		fetchProductData().then((data) => {
+			setAllProducts(data);
+		});
+	});
+
 	const [lowStocks, setLowStocks] = React.useState<Checked>(false);
 	const [highestSelling, setHighestSelling] = React.useState<Checked>(false);
 	const [searchTerm, setSearchTerm] = React.useState<string>("");
@@ -38,9 +45,9 @@ const Page = () => {
 		"ascending" | "descending" | null
 	>(null);
 
-	const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
-		null
-	);
+	const [selectedCategory, setSelectedCategory] = React.useState<
+		string | undefined | null
+	>(null);
 
 	const clearFilter = () => {
 		setLowStocks(false);
@@ -48,7 +55,7 @@ const Page = () => {
 		setSelectedCategory(null);
 		setSearchTerm("");
 		setSortCriteria(null);
-		setSortOrder(null);	
+		setSortOrder(null);
 	};
 	const filteredProducts = React.useMemo(() => {
 		let products = allProducts.filter((item) => {
@@ -85,6 +92,7 @@ const Page = () => {
 		selectedCategory,
 		sortCriteria,
 		sortOrder,
+		allProducts,
 	]);
 	return (
 		<div className='md:px-7 px-3 mt-3'>
@@ -145,7 +153,9 @@ const Page = () => {
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className='w-56'>
-						<DropdownMenuLabel className='select-none'>Sort by</DropdownMenuLabel>
+						<DropdownMenuLabel className='select-none'>
+							Sort by
+						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuCheckboxItem
 							checked={sortCriteria === "price" && sortOrder === "ascending"}
@@ -215,10 +225,10 @@ const Page = () => {
 							key={index}
 							id={item.id}
 							price={item.price}
-							supplier={item.supplier}
+							supplier={item.supplier || "Unknown"}
 							inStock={item.inStock}
 							name={item.name}
-							category={item.category}
+							category={item.category || "Unknown category"}
 							sales={item.sales}
 						/>
 					))}
@@ -237,6 +247,8 @@ const InvProdCard = ({
 	price,
 	category,
 }: allProductsProps) => {
+	
+	
 	return (
 		<div className='grid grid-cols-5 md:grid-cols-9 border-b justify-items-start items-center px-3 py-2 '>
 			<p className='hidden md:block'>{id}</p>

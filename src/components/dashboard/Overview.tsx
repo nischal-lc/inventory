@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Bar,
 	BarChart,
@@ -19,7 +19,30 @@ import {
 import { barChartConfig, pieChartConfig } from "@/lib/chartConfigs";
 import { barChartData, pieChartData } from "@/lib/datas";
 
+interface BarChartData {
+	type: unknown | string;
+	quantity: number;
+}
+
+interface PieChartData {
+	type: unknown | string;
+	quantity: number;
+	fill: string;
+}
+
 const Overview = () => {
+	const [chartData, setBarChartData] = useState<BarChartData[]>([]);
+	const [chartDataPie, setChartDataPie] = useState<PieChartData[]>([]);
+
+	useEffect(() => {
+		barChartData.then((data) => {
+			setBarChartData(data);
+		});
+		pieChartData.then((data) => {
+			setChartDataPie(data);
+		});
+	}, [chartData]);
+
 	return (
 		<div className='grid lg:grid-cols-4 md:grid-rows-none grid-rows-2 gap-3'>
 			<div className='border rounded-md px-4 py-5 lg:col-span-3 md:col-span-2 sm:col-span-1'>
@@ -29,10 +52,7 @@ const Overview = () => {
 				</p>
 				<div className='lg:h-[350px] w-full mt-9'>
 					<ChartContainer config={barChartConfig} className='h-full w-full'>
-						<BarChart
-							accessibilityLayer
-							data={barChartData}
-							margin={{ top: 20 }}>
+						<BarChart accessibilityLayer data={chartData} margin={{ top: 20 }}>
 							<CartesianGrid vertical={false} />
 							<XAxis
 								dataKey='type'
@@ -66,10 +86,10 @@ const Overview = () => {
 					<ChartContainer
 						config={pieChartConfig}
 						className='mx-auto h-full w-full pb-0'>
-						<PieChart margin={{ top:10, left: 20, right: 20 }}>
+						<PieChart margin={{ top: 10, left: 20, right: 20 }}>
 							<ChartTooltip content={<ChartTooltipContent />} />
 							<Pie
-								data={pieChartData}
+								data={chartDataPie}
 								dataKey='quantity'
 								label
 								nameKey='type'
