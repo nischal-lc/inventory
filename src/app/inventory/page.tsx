@@ -21,7 +21,14 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { ArrowDownNarrowWide, Filter, Pen, Plus, Trash2 } from "lucide-react";
+import {
+	ArrowDownNarrowWide,
+	Eye,
+	Filter,
+	Pen,
+	Plus,
+	Trash2,
+} from "lucide-react";
 import { LOW_STOCK_THRESHOLD } from "@/lib/datas";
 import { editProduct, fetchProductData, removeProduct } from "@/lib/actions";
 import { allProductsProps, Product } from "@/lib/types";
@@ -67,6 +74,7 @@ const Page = () => {
 	useEffect(() => {
 		fetchProducts();
 	}, [update]);
+
 	const handleUpdate = () => {
 		setUpdate((prev) => !prev);
 	};
@@ -334,18 +342,16 @@ const InvProdCard = ({
 			setIsOpen(false);
 			form.reset(validatedValues.data);
 		} else {
-			toast("Validation error!");
+			toast.error("Validation error!");
 		}
 	};
 	return (
 		<div className='grid grid-cols-5 md:grid-cols-9 border-b justify-items-start items-center px-3 py-2 '>
-			<p className='hidden md:block truncate text-ellipsis max-w-[50px]'>
-				{id}
-			</p>
-			<p className='col-span-1 md:col-span-2 truncate text-ellipsis max-w-[70px] md:max-w-[100px] lg:max-w-max'>
+			<p className='hidden md:block truncate max-w-[50px]'>{id}</p>
+			<p className='col-span-1 md:col-span-2 truncate max-w-[70px] md:max-w-[100px] lg:max-w-max'>
 				{name}
 			</p>
-			<p className='hidden md:block'>{category}</p>
+			<p className='hidden md:block truncate max-w-[120px]'>{category}</p>
 			<p>
 				<span className='text-primary-foreground font-medium'>Rs. {price}</span>
 			</p>
@@ -632,6 +638,11 @@ const InvProdCard = ({
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
+				<Link href={`/product/${id}`}>
+					<Button size='sm'>
+							<Eye />
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);
