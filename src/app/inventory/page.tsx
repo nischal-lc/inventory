@@ -362,7 +362,7 @@ const InvProdCard = ({
 				}`}>
 				{inStock}
 			</p>
-			<p>{supplier}</p>
+			<p className='truncate max-w-[60px]'>{supplier}</p>
 			<div className='flex gap-2'>
 				<Dialog open={isOpen} onOpenChange={setIsOpen}>
 					<DialogTrigger className='cursor-pointer bg-secondary p-1.5 rounded-md text-white'>
@@ -640,7 +640,7 @@ const InvProdCard = ({
 				</Dialog>
 				<Link href={`/product/${id}`}>
 					<Button size='sm'>
-							<Eye />
+						<Eye />
 					</Button>
 				</Link>
 			</div>
