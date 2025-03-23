@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/contextProviders/ThemeProvider";
 import Navbar from "@/components/ui/Navbar";
 import Sidebar from "@/components/ui/Sidebar";
 import { SidebarProvider } from "@/contextProviders/SidebarProvider";
+import { Toaster } from "@/components/ui/sonner"
+
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -43,6 +45,7 @@ export default function RootLayout({
 							{children}
 						</div>
 					</div>
+							<Toaster/>
 					</SidebarProvider>
 				</ThemeProvider>
 			</body>

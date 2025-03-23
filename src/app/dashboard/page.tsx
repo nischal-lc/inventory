@@ -7,7 +7,8 @@ import Summary from "@/components/dashboard/Summary";
 import TopProducts from "@/components/dashboard/TopProducts";
 import { Button } from "@/components/ui/button";
 import LayoutLabel from "@/components/ui/LayoutLabel";
-import { fetchProductData, LOW_STOCK_THRESHOLD } from "@/lib/datas";
+import { LOW_STOCK_THRESHOLD } from "@/lib/datas";
+import { fetchProductData } from "@/lib/actions";
 import { Product } from "@/lib/types";
 import {
 	DollarSign,

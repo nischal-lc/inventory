@@ -1,22 +1,10 @@
+import { fetchProductData } from "./actions";
 import { pieChartConfig } from "./chartConfigs";
 import {Product, RecentCardProps } from "./types";
 
 export const LOW_STOCK_THRESHOLD = 100;
 const TOTAL_ITEMS = 1500;
 
-export async function fetchProductData() {
-  try {
-      const response = await fetch("/api/products");
-      if (!response.ok) {
-          throw new Error("Failed to fetch product data");
-      }
-      const data = await response.json();
-      return data;
-  } catch (error) {
-      console.error("Error fetching product data:", error);
-      return [];
-  }
-}
 
 export const recentActivities:RecentCardProps[] = [
     {

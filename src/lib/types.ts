@@ -17,6 +17,7 @@ export interface Product {
 	image: string;
 	price: number;
 	category?: string;
+	description?: string;
   };
   
 
@@ -60,4 +61,7 @@ export interface allProductsProps {
     inStock: number;
     supplier: string;
 	category: string;
+	description?: string;
+	categories?: string[];
+	update?: ()=>void;
 }
