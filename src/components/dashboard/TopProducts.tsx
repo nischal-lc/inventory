@@ -17,6 +17,7 @@ const TopProducts = ({ products }: { products: Product[] }) => {
 						.slice(0, 8)
 						.map((item, index) => (
 							<ProductCard
+								id={item.id}
 								key={index}
 								image={item.image}
 								inStock={item.inStock}
