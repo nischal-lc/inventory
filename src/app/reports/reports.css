@@ -1,0 +1,38 @@
+.reports-container {
+  padding: 2rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0f0f0f; /* dark background */
+}
+
+.reports-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #ffffff; /* white title */
+}
+
+.reports-card {
+  background: #1a1a1a; /* slightly lighter dark card */
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+  text-align: center;
+  max-width: 500px;
+  border: 1px solid #2d2d2d;
+}
+
+.reports-text {
+  font-size: 1.25rem;
+  color: #e5e5e5;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.reports-subtext {
+  font-size: 0.95rem;
+  color: #9ca3af; /* soft gray */
+}
