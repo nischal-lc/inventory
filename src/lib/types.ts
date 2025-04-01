@@ -16,6 +16,7 @@ export interface Product {
 	rating?: number;
 	image: string;
 	price: number;
+	quantity:number;
 	category?: string;
 	description?: string;
   };
@@ -41,6 +42,7 @@ export interface LIprops {
 }
 
 export interface ProductCardProps {
+	id:string;
 	name: string;
 	sales: number;
 	rating: number;
@@ -61,6 +63,7 @@ export interface allProductsProps {
     inStock: number;
     supplier: string;
 	category: string;
+	quantity: number;
 	description?: string;
 	categories?: string[];
 	update?: ()=>void;

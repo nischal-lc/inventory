@@ -1,12 +1,14 @@
+"use client"
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Badge } from "./badge";
 import { LOW_STOCK_THRESHOLD } from "@/lib/datas";
 import { ProductCardProps } from "@/lib/types";
-
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({
+	id,
 	name,
 	sales,
 	rating,
@@ -16,8 +18,10 @@ const ProductCard = ({
 	if (rating > 5) {
 		rating = 5;
 	}
+
+	const router = useRouter()
 	return (
-		<div className='flex w-full min-h-max px-3 py-2  mt-2 bg-secondary cursor-pointer border border-accent hover:bg-background transition duration-100 hover:border rounded'>
+		<div onClick={()=>{router.push(`/product/${id}`)}} className='flex w-full min-h-max px-3 py-2  mt-2 bg-secondary cursor-pointer border border-accent hover:bg-background transition duration-100 hover:border rounded'>
 			<Image
 				src={image}
 				height={100}

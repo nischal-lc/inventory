@@ -18,6 +18,7 @@ export async function fetchProductData() {
 
 export async function addProduct(value: z.infer<typeof productSchema>){
     try{
+        console.log(value)
         const response = await fetch("/api/products", {
             method: "POST",
             headers: {

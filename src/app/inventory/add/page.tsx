@@ -86,6 +86,26 @@ const Page = () => {
 							<div className='grid w-full items-center gap-4'>
 								<FormField
 									control={form.control}
+									name='id'
+									render={({ field }) => (
+										<FormItem>
+											<div className='flex flex-col space-y-2'>
+												<Label htmlFor='id'>Product ID</Label>
+												<FormControl>
+													<Input
+														id='id'
+														placeholder='ID of your product..'
+														className='border-primary-foreground/20'
+														{...field}
+													/>
+												</FormControl>
+											</div>
+											<FormMessage className='text-red-600' />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
 									name='name'
 									render={({ field }) => (
 										<FormItem>
@@ -112,7 +132,7 @@ const Page = () => {
 											{newCategory ? (
 												<FormItem>
 													<div className='flex flex-col space-y-2'>
-														<Label htmlFor='name'>Category</Label>
+														<Label htmlFor='category'>Category</Label>
 														<FormControl>
 															<Input
 																id='category'
@@ -225,11 +245,31 @@ const Page = () => {
 									render={({ field }) => (
 										<FormItem>
 											<div className='flex flex-col space-y-2'>
-												<Label htmlFor='name'>Product description</Label>
+												<Label htmlFor='description'>Product description</Label>
 												<FormControl>
 													<Textarea
 														id='description'
 														placeholder='Description of your project...'
+														className='border-primary-foreground/20'
+														{...field}
+													/>
+												</FormControl>
+											</div>
+											<FormMessage className='text-red-600' />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name='warehouseId'
+									render={({ field }) => (
+										<FormItem>
+											<div className='flex flex-col space-y-2'>
+												<Label htmlFor='warehouseId'>Warehouse ID</Label>
+												<FormControl>
+													<Textarea
+														id='warehouseId'
+														placeholder='ID of the warehourse...'
 														className='border-primary-foreground/20'
 														{...field}
 													/>
