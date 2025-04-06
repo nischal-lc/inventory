@@ -11,14 +11,20 @@ export interface Product {
 	id: string;
 	name: string;
 	sales: number;
-	inStock: number;
+	quantity: number;
 	supplier?: string;
 	rating?: number;
 	image: string;
 	price: number;
 	category?: string;
 	description?: string;
+	warehouseId?: string;
   };
+
+export interface Warehouse {
+	_id: string;
+	name: string;
+}
   
 
 export interface RecentCardProps {
@@ -44,7 +50,7 @@ export interface ProductCardProps {
 	name: string;
 	sales: number;
 	rating: number;
-	inStock: number;
+	quantity: number;
 	image: string;
 }
 
@@ -58,10 +64,12 @@ export interface allProductsProps {
     name: string;
     sales: number;
 	price: number;
-    inStock: number;
+    quantity: number;
     supplier: string;
 	category: string;
 	description?: string;
+	warehouseId?: string;
+	warehouses?: Record<string, string>;
 	categories?: string[];
 	update?: ()=>void;
 }

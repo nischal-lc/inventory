@@ -26,13 +26,14 @@ const Dashboard = () => {
 	const [totalValue, setTotalValue] = useState<number>(0);
 	const [totalSales, setTotalSales] = useState<number>(0);
 	const [topSelling, setTopSelling] = useState<Product[]>([]);
+	const [reportKey, setReportKey] = useState<number>(0);
 	useEffect(() => {
 		fetchProductData()
 			.then((data) => {
 				setProducts(data);
 				setLowStocks(
 					data.filter(
-						(product: Product) => product.inStock < LOW_STOCK_THRESHOLD
+						(product: Product) => product.quantity < LOW_STOCK_THRESHOLD
 					)
 				);
 				setTotalValue(
@@ -47,6 +48,7 @@ const Dashboard = () => {
 				setTopSelling(
 					data.sort((a: Product, b: Product) => b.sales - a.sales).slice(0, 5)
 				);
+				setReportKey((prev)=>prev + 1);
 			})
 			.catch((err) => console.log(err));
 	}, []);
@@ -98,7 +100,7 @@ const Dashboard = () => {
 				<QuickActions />
 			</div>
 			<LayoutLabel>Reports</LayoutLabel>
-			<Report />
+			<Report key={reportKey}/>
 		</div>
 	);
 };

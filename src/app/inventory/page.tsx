@@ -30,8 +30,13 @@ import {
 	Trash2,
 } from "lucide-react";
 import { LOW_STOCK_THRESHOLD } from "@/lib/datas";
-import { editProduct, fetchProductData, removeProduct } from "@/lib/actions";
-import { allProductsProps, Product } from "@/lib/types";
+import {
+	editProduct,
+	fetchProductData,
+	fetchWarehouses,
+	removeProduct,
+} from "@/lib/actions";
+import { allProductsProps, Product, Warehouse } from "@/lib/types";
 import Link from "next/link";
 import { toast } from "sonner";
 import {
@@ -60,6 +65,7 @@ type Checked = DropdownMenuCheckboxItemProps["checked"];
 const Page = () => {
 	const [allProducts, setAllProducts] = useState<Product[]>([]);
 	const [categories, setCategories] = useState<string[]>([]);
+	const [warehouses, setWarehouses] = useState<Record<string, string>>({});
 	const [update, setUpdate] = useState<boolean>(false);
 
 	const fetchProducts = async () => {
@@ -71,8 +77,21 @@ const Page = () => {
 		setAllProducts(data);
 	};
 
+	const fetchWarehouseNames = async () => {
+		const data = await fetchWarehouses();
+		const warehouses = data.reduce(
+			(acc: Record<string, string>, item: Warehouse) => {
+				acc[item.name] = item._id || "";
+				return acc;
+			},
+			{}
+		);
+		setWarehouses(warehouses as Record<string, string>);
+	};
+
 	useEffect(() => {
 		fetchProducts();
+		fetchWarehouseNames();
 	}, [update]);
 
 	const handleUpdate = () => {
@@ -102,7 +121,7 @@ const Page = () => {
 	};
 	const filteredProducts = React.useMemo(() => {
 		let products = allProducts.filter((item) => {
-			if (lowStocks && item.inStock > LOW_STOCK_THRESHOLD) return false;
+			if (lowStocks && item.quantity > LOW_STOCK_THRESHOLD) return false;
 			if (highestSelling && item.sales < 1000) return false;
 			if (selectedCategory && item.category !== selectedCategory) return false;
 			if (
@@ -121,8 +140,8 @@ const Page = () => {
 						: b.price - a.price;
 				} else if (sortCriteria === "quantity") {
 					return sortOrder === "ascending"
-						? a.inStock - b.inStock
-						: b.inStock - a.inStock;
+						? a.quantity - b.quantity
+						: b.quantity - a.quantity;
 				}
 				return 0;
 			});
@@ -273,12 +292,14 @@ const Page = () => {
 									id={item.id}
 									price={item.price}
 									supplier={item.supplier || "Unknown"}
-									inStock={item.inStock}
+									quantity={item.quantity}
 									name={item.name}
 									category={item.category || "Unknown category"}
 									categories={categories}
 									sales={item.sales}
 									description={item.description || "No description"}
+									warehouseId={item.warehouseId}
+									warehouses={warehouses}
 								/>
 							))}
 						</div>
@@ -299,12 +320,14 @@ const InvProdCard = ({
 	id,
 	name,
 	sales,
-	inStock,
+	quantity,
 	supplier,
 	price,
 	category,
 	description,
 	categories,
+	warehouseId,
+	warehouses,
 	update,
 }: allProductsProps) => {
 	const [loading, setLoading] = useState(false);
@@ -321,12 +344,14 @@ const InvProdCard = ({
 	const form = useForm<z.infer<typeof productSchema>>({
 		resolver: zodResolver(productSchema),
 		defaultValues: {
+			id: id,
 			category: category,
 			description: description,
 			name: name,
 			price: price,
-			quantity: inStock,
+			quantity: quantity,
 			supplier: supplier,
+			warehouseId: warehouseId,
 		},
 	});
 
@@ -334,7 +359,15 @@ const InvProdCard = ({
 		const validatedValues = productSchema.safeParse(values);
 		if (validatedValues.success) {
 			const response = await editProduct(id, validatedValues.data);
-			toast(`${response.message}`);
+			if (
+				typeof response === "object" &&
+				response !== null &&
+				"message" in response
+			) {
+				toast(`${(response as { message: string }).message}`);
+			} else {
+				toast.error("Unexpected response format");
+			}
 			setNewCategory(false);
 			if (update) {
 				update();
@@ -358,9 +391,9 @@ const InvProdCard = ({
 			<p className='hidden md:block'>{sales}</p>
 			<p
 				className={`${
-					inStock <= LOW_STOCK_THRESHOLD ? "text-red-500 font-medium" : null
+					quantity <= LOW_STOCK_THRESHOLD ? "text-red-500 font-medium" : null
 				}`}>
-				{inStock}
+				{quantity}
 			</p>
 			<p className='truncate max-w-[60px]'>{supplier}</p>
 			<div className='flex gap-2'>
@@ -377,6 +410,26 @@ const InvProdCard = ({
 							<Form {...form}>
 								<form onSubmit={form.handleSubmit(onSubmit)}>
 									<div className='grid w-full items-center gap-4'>
+									<FormField
+											control={form.control}
+											name='id'
+											render={({ field }) => (
+												<FormItem>
+													<div className='flex flex-col space-y-2'>
+														<Label htmlFor='id'>Product ID</Label>
+														<FormControl>
+															<Input
+																id='id'
+																placeholder='Id of your product..'
+																className='border-primary-foreground/20'
+																{...field}
+															/>
+														</FormControl>
+													</div>
+													<FormMessage className='text-red-600' />
+												</FormItem>
+											)}
+										/>
 										<FormField
 											control={form.control}
 											name='name'
@@ -399,13 +452,44 @@ const InvProdCard = ({
 										/>
 										<FormField
 											control={form.control}
+											name='warehouseId'
+											render={({ field }) => (
+												<FormItem>
+													<div className='flex flex-col space-y-2'>
+														<Label htmlFor='warehouseId'>Warehouse</Label>
+														<Select
+															onValueChange={field.onChange}
+															defaultValue={field.value}>
+															<FormControl>
+																<SelectTrigger className='w-full border-primary-foreground/20'>
+																	<SelectValue placeholder='Select a warehouse' />
+																</SelectTrigger>
+															</FormControl>
+															<SelectContent>
+																{Object.entries(warehouses || {}).map(
+																	([key, value], index) => (
+																		<SelectItem value={value} key={index}>
+																			{key}
+																		</SelectItem>
+																	)
+																)}
+															</SelectContent>
+														</Select>
+													</div>
+													<FormMessage className='text-red-600' />
+												</FormItem>
+											)}
+										/>
+
+										<FormField
+											control={form.control}
 											name='category'
 											render={({ field }) => (
 												<>
 													{newCategory ? (
 														<FormItem>
 															<div className='flex flex-col space-y-2'>
-																<Label htmlFor='name'>Category</Label>
+																<Label htmlFor='category'>Category</Label>
 																<FormControl>
 																	<Input
 																		id='category'
@@ -534,7 +618,7 @@ const InvProdCard = ({
 										/>
 									</div>
 									<div className='flex gap-2 mt-2'>
-										<Button type='submit' className='cursor-pointer'>
+										<Button type="submit" className='cursor-pointer'>
 											Edit product
 										</Button>
 										<DialogClose asChild>
@@ -639,7 +723,7 @@ const InvProdCard = ({
 					</DialogContent>
 				</Dialog>
 				<Link href={`/product/${id}`}>
-					<Button size='sm'>
+					<Button size='sm' className='cursor-pointer'>
 						<Eye />
 					</Button>
 				</Link>

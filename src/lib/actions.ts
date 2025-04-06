@@ -5,7 +5,7 @@ export async function fetchProductData() {
   try {
       const response = await fetch("/api/products");
       if (!response.ok) {
-          throw new Error("Failed to fetch product data");
+          return {message: "Failed to fetch product data"};
       }
       const data = await response.json();
       return data;
@@ -15,6 +15,20 @@ export async function fetchProductData() {
   }
 }
 
+export async function fetchWarehouses(){
+    try{
+        const response = await fetch("/api/warehouses");
+        if (!response.ok) {
+            return {message: "Failed to fetch warehouse data"};
+        }
+        const data = await response.json();
+        return data;
+    }
+    catch(err){
+        console.error("Error fetching warehouse data:", err);
+        return {message: "Failed to fetch warehouse data"};
+    }
+}
 
 export async function addProduct(value: z.infer<typeof productSchema>){
     try{
@@ -25,11 +39,18 @@ export async function addProduct(value: z.infer<typeof productSchema>){
             },
             body: JSON.stringify({...value}),
         });
-        return response.json();
-    }
-    catch(error){
-        return error;
-    }
+        if(response.ok){
+            return {message: "Product added sucessfully"};
+        }   
+        const errorData = await response.json();
+    return {
+      message: errorData.message || "Failed to add product",
+    };
+  } catch (error) {
+    return {
+      message: error instanceof Error ? error.message : "An unknown error occurred",
+    };
+  }
 }
 
 
@@ -57,10 +78,12 @@ export async function editProduct(id: string, values: z.infer<typeof productSche
             },
             body: JSON.stringify({...values}),
         });
-        return response.json();
+        if(response.ok){
+            return {message: "Product updated successfully"}
+        }
     }
     catch(error){
-        return error;
+        return {message: error};
     }
 }
 

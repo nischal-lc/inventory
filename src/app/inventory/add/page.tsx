@@ -23,7 +23,7 @@ import {
 	FormItem,
 	FormMessage,
 } from "@/components/ui/form";
-import { addProduct, fetchProductData } from "@/lib/actions";
+import { addProduct, fetchProductData, fetchWarehouses } from "@/lib/actions";
 import { toast } from "sonner";
 import { Product } from "@/lib/types";
 import {
@@ -37,6 +37,7 @@ import { Plus } from "lucide-react";
 
 const Page = () => {
 	const [categories, setCategories] = useState<string[]>([]);
+	const [warehouses, setWarehouses] = useState<string[]>([]);
 	const [newCategory, setNewCategory] = useState(false);
 	const form = useForm<z.infer<typeof productSchema>>({
 		resolver: zodResolver(productSchema),
@@ -47,6 +48,8 @@ const Page = () => {
 			price: 0,
 			quantity: 0,
 			supplier: "",
+			id: "",
+			warehouseId: "",
 		},
 	});
 
@@ -57,12 +60,21 @@ const Page = () => {
 			] as string[];
 			setCategories(categories);
 		});
-	},[]);
+
+		fetchWarehouses().then((data) => {
+			const warehouses = [
+				...new Set(data.map((item: Product) => item.warehouseId)),
+			] as string[];
+			setWarehouses(warehouses);
+		});
+	}, []);
 
 	const onSubmit = async (values: z.infer<typeof productSchema>) => {
 		const validatedValues = productSchema.safeParse(values);
 		if (validatedValues.success) {
-			const response = await addProduct(validatedValues.data);
+			const response = (await addProduct(validatedValues.data)) as {
+				message: string;
+			};
 			toast(`${response.message}`);
 			setNewCategory(false);
 			form.reset();
@@ -84,6 +96,26 @@ const Page = () => {
 					<Form {...form}>
 						<form onSubmit={form.handleSubmit(onSubmit)}>
 							<div className='grid w-full items-center gap-4'>
+								<FormField
+									control={form.control}
+									name='id'
+									render={({ field }) => (
+										<FormItem>
+											<div className='flex flex-col space-y-2'>
+												<Label htmlFor='id'>Product ID</Label>
+												<FormControl>
+													<Input
+														id='id'
+														placeholder='b3ASjad28sdAds'
+														className='border-primary-foreground/20'
+														{...field}
+													/>
+												</FormControl>
+											</div>
+											<FormMessage className='text-red-600' />
+										</FormItem>
+									)}
+								/>
 								<FormField
 									control={form.control}
 									name='name'
@@ -130,7 +162,8 @@ const Page = () => {
 														<Label htmlFor='category'>Category</Label>
 														<Select
 															onValueChange={field.onChange}
-															defaultValue={field.value}>
+															defaultValue={field.value}
+															value={field.value}>
 															<FormControl>
 																<SelectTrigger className='w-full border-primary-foreground/20'>
 																	<SelectValue placeholder='Select a category' />
@@ -154,6 +187,37 @@ const Page = () => {
 													<FormMessage className='text-red-600' />
 												</FormItem>
 											)}
+										</>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name='warehouseId'
+									render={({ field }) => (
+										<>
+											<FormItem>
+												<div className='flex flex-col space-y-2'>
+													<Label htmlFor='warehouse'>Warehouse</Label>
+													<Select
+														onValueChange={field.onChange}
+														defaultValue={field.value}
+														value={field.value}>
+														<FormControl>
+															<SelectTrigger className='w-full border-primary-foreground/20'>
+																<SelectValue placeholder='Select a warehouse' />
+															</SelectTrigger>
+														</FormControl>
+														<SelectContent>
+															{warehouses.map((item, index) => (
+																<SelectItem value={item} key={index}>
+																	{item}
+																</SelectItem>
+															))}
+														</SelectContent>
+													</Select>
+												</div>
+												<FormMessage className='text-red-600' />
+											</FormItem>
 										</>
 									)}
 								/>

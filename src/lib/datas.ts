@@ -1,10 +1,9 @@
+"use client";
 import { fetchProductData } from "./actions";
 import { pieChartConfig } from "./chartConfigs";
 import {Product, RecentCardProps } from "./types";
 
 export const LOW_STOCK_THRESHOLD = 100;
-const TOTAL_ITEMS = 1500;
-
 
 export const recentActivities:RecentCardProps[] = [
     {
@@ -78,7 +77,7 @@ export const recentActivities:RecentCardProps[] = [
     const categories= [...new Set(data.map((item: Product)=>item.category))];
     const chartData = categories.map((category)=>{
       const items = data.filter((item: Product)=>item.category === category);
-      const quantity = items.reduce((acc: number, item: Product)=>acc + item.inStock, 0);
+      const quantity = items.reduce((acc: number, item: Product)=>acc + item.quantity, 0);
       return {type: category, quantity}
     })
     return chartData;
@@ -86,17 +85,17 @@ export const recentActivities:RecentCardProps[] = [
 
   export const pieChartData = fetchProductData().then((data)=>{
     const categories= [...new Set(data.map((item: Product)=>item.category))] as string[];
-
+    const TOTAL_ITEMS = data.reduce((acc: number, item: Product)=>acc + item.quantity, 0);
     const chartData = categories.map((category)=>{
       const items = data.filter((item: Product)=>item.category === category);
-      const stock: number = items.reduce((acc: number, item: Product)=>acc + item.inStock, 0);
-      const configEntry = pieChartConfig[category as keyof typeof pieChartConfig];
-
+      const stock: number = items.reduce((acc: number, item: Product)=>acc + item.quantity, 0);
+      const configEntry = pieChartConfig[category.toLowerCase() as keyof typeof pieChartConfig];
       return {type: category, quantity: Number(((stock / TOTAL_ITEMS * 100)).toFixed(2)),
         fill: configEntry && "color" in configEntry ? configEntry.color : "var(--color-other)"
       }
-      
+        
     })
-  
+    
+    console.log(chartData);
     return chartData;
   })
